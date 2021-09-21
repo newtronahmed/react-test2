@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {BrowserRouter as Router , Route , Switch} from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import Home from './pages/home';
+import Detail from './pages/detail'
+import PostContextProvider from './context/postContext';
+import Edit from './pages/edit';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <PostContextProvider>
+      <Router>
+        <Switch>
+          <Route  exact path="/" component={Home} />
+          <Route exact path="/edit/:id" component={Edit} />
+          <Route path="/:id" component={Detail} />
+        </Switch>
+        <ToastContainer />
+      </Router>
+    </PostContextProvider>
+    </>
   );
 }
 
